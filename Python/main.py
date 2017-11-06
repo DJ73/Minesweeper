@@ -28,7 +28,7 @@ def view():
     for a in range(grid_size[0]):
         print '|',
         for b in range(grid_size[1]):
-            disp_count += display[a][b] != ' '
+            disp_count += display[a][b].isdigit()
             print display[a][b],'|',
         # print '|'
         print
@@ -44,7 +44,7 @@ def analyse(point):
                 adj.append([a,b])
     count = sum([a in grid for a in adj])
     print adj, count
-    display[point[0]][point[1]] = count
+    display[point[0]][point[1]] = str(count)
     if not count:
         for a in adj:
             analyse(a)
@@ -64,6 +64,9 @@ print "Begin clicking, so to speak..."
 t = time()
 while (isAlive):
     click = map(int, raw_input().split())
+    if len(click) == 1:
+        continue
+    click = [click[0]-1, click[1]-1]
     # print click
     if isNotValid(click):
         print error[isNotValid(click)]
@@ -81,5 +84,6 @@ while (isAlive):
 if (isAlive):
     print "Congrats, you survived!"
     print "Your score is %d" % (round(10000/(time()-t), 0))
+
 else:
     print "BOOM"
