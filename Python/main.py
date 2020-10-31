@@ -1,6 +1,7 @@
 from random import randint
 from time import time
 
+#sets parameter sizes for grid and traps
 grid_size = map(int, raw_input("Grid dimensions (h w) : ").split())
 mine_count = int(raw_input("Number of traps : "))
 
@@ -12,6 +13,7 @@ display = [[' ' for a in range(grid_size[1])] for b in range(grid_size[0])]
 error = {1 : "Remember to click inside the grid!!!", 2 : "You clicked there already!"}
 
 
+#validity of points
 def isNotValid(points):
     if points[0] in range(0, grid_size[0]):
         if points[1] in range(0, grid_size[1]):
@@ -21,6 +23,7 @@ def isNotValid(points):
                 return 2
     return 1
 
+#display generation
 def view():
     global disp_count
     disp_count = 0
@@ -35,6 +38,8 @@ def view():
         print '+ ' + '- + '*grid_size[1]
     # print '+ ' + '- '*grid_size[1] + '+'
 
+    
+#calculation of points
 def analyse(point):
     count = 0
     adj = list()
@@ -59,6 +64,7 @@ while (len(grid) != mine_count):
 grid.sort()
 print grid
 
+#click responses for the game itself
 view()
 print "Begin clicking, so to speak..."
 t = time()
