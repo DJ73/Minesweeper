@@ -5,6 +5,7 @@ from PIL import ImageTk
 
 flag = u"\u26F3"
 
+#specify grid size
 grid_size = map(int, raw_input("Grid dimensions (h w) : ").split())
 mine_count = int(raw_input("Number of traps : "))
 shades = ['#322', '#422', '#522', '#622', '#722', '#822', '#922', '#a22', '#b22']
@@ -14,6 +15,7 @@ shades = ['#322', '#422', '#522', '#622', '#722', '#822', '#922', '#a22', '#b22'
 
 root = Tk()
 
+#define using classes
 class tile:
     def __init__(self, a, b):
         self.widget = Button(root, text = ' ', command = self.onclick)
@@ -53,6 +55,7 @@ class tile:
     def rightclicked(self, event):
         self.widget.config(text = flag, fg = 'red')
 
+#the game will end (becuase someone made superhero references?)
 def endgame():
     for a in range(grid_size[0]):
         for b in range(grid_size[1]):
@@ -64,6 +67,7 @@ def endgame():
 grid = []
 display = [[tile(b,a) for a in range(grid_size[1])] for b in range(grid_size[0])]
 
+#check point validity
 def isNotValid(points):
     if points[0] in range(0, grid_size[0]):
         if points[1] in range(0, grid_size[1]):
@@ -77,6 +81,7 @@ def mine(a, b):
     display[a][b].config(text = '*', foreground = 'red')
 
 
+#board display      
 def board():
     for a in range(grid_size[0]):
         for b in range(grid_size[1]):
